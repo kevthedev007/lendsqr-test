@@ -49,5 +49,6 @@ module.exports = {
   queryUser,
   getUserById,
   hashPassword,
-  comparePassword
+  comparePassword,
+  createToken,
 }
