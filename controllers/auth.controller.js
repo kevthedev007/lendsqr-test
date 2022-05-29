@@ -24,6 +24,7 @@ const register = async (req, res, next) => {
       password: hashedPassword
     })
 
+    console.log(newUser)
     const token = await UserService.createToken(newUser.id)
 
     return res.status(201).json({
