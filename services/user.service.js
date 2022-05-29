@@ -8,8 +8,7 @@ const jwt = require("jsonwebtoken");
  * @returns {Promise<User>}
  */
 const createUser = async (createBody) => {
-  const [user] = await db("users").insert(createBody)
-  return user;
+  return await db("users").insert(createBody)
 }
 
 /**
@@ -19,7 +18,6 @@ const createUser = async (createBody) => {
  */
 const queryUser = async (filter) => {
   const user = await db("users").where(filter).first()
-  console.log(user)
   return user;
 }
 
