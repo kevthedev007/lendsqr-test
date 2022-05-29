@@ -19,6 +19,7 @@ const createUser = async (createBody) => {
  */
 const queryUser = async (filter) => {
   const user = await db("users").where(filter).first()
+  console.log(user)
   return user;
 }
 
