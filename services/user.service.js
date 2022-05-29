@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
  * @returns {Promise<User>}
  */
 const createUser = async (createBody) => {
-  const [user] = await db("users").insert(createBody).returning(["id", "firstName", "lastName", "email"]);
+  const [user] = await db("users").insert(createBody)
   return user;
 }
 
@@ -49,6 +49,5 @@ module.exports = {
   queryUser,
   getUserById,
   hashPassword,
-  createToken,
   comparePassword
 }
