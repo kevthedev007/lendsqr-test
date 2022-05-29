@@ -8,7 +8,8 @@ const jwt = require("jsonwebtoken");
  * @returns {Promise<User>}
  */
 const createUser = async (createBody) => {
-  return await db("users").insert(createBody)
+  const [id] = await db("users").insert(createBody)
+  return getUserById(id);
 }
 
 /**

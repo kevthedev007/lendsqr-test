@@ -6,8 +6,8 @@ const db = require("../db/db");
  * @returns {Promise<Account>}
  */
 const createAccount = async (accountBody) => {
-  const [account] = await db("accounts").insert(accountBody).returning(["accountName", "accountNumber", "balance"]);
-  return account;
+  const [account] = await db("accounts").insert(accountBody)
+  return getAccountById(account)
 }
 
 /**
