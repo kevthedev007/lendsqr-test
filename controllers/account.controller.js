@@ -9,6 +9,7 @@ const fundAccount = async (req, res, next) => {
 
     await db.transaction(async trx => {
       const account = await AccountService.queryAccount({ userId: req.user.id });
+      console.log("account", account)
 
       if (!account) {
         throw createError.NotFound({
