@@ -23,6 +23,7 @@ const fundAccount = async (req, res, next) => {
         trx,
       )
 
+      console.log("updatedAccount", updatedAccount)
       await TransactionService.addToTransaction({
         transactionType: "deposit",
         amount,
