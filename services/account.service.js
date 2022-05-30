@@ -29,10 +29,10 @@ const getAccountById = async (accountId) => {
 const updateAccount = async (accountId, updateBody, transaction) => {
   if (transaction) {
     await db('accounts').where({ id: accountId }).update(updateBody).transacting(transaction);
-    return await getAccountById(accountId)
+    return await db('account').whereIn('id', accountId);
   }
   await db('accounts').where({ id: accountId }).update(updateBody)
-  return getAccountById(accountId)
+  return await db('account').whereIn('id', accountId);
 }
 
 
