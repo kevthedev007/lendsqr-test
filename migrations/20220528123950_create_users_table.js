@@ -19,14 +19,14 @@ exports.up = function (knex) {
       // table.string("bankName").notNullable();
       table.string("accountNumber").notNullable();
       table.double("balance").notNullable().defaultTo(0);
-      table.integer("userId").unique().references("id").inTable("users").onDelete("cascade");
+      table.foreign('userId').references('users.id');
     })
     .createTable("transactions", table => {
       table.increments("id").primary();
       table.enum('transactionType', ['withdrawal', 'transfer', 'deposit']).notNullable();
       table.double("amount").notNullable();
       table.enum("status", ["success", "failed"]).defaultTo("success").notNullable();
-      table.integer("userId").references("id").inTable("users").onDelete("cascade");
+      table.foreign('userId').references('users.id');
     })
 };
 
