@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.string("accountName", 255).notNullable();
     table.string("accountNumber").notNullable();
     table.double("balance").notNullable().defaultTo(0);
-    table.foreign('userId').references('users.id');
+    table.integer("userId").unique().references("id").inTable("users").onDelete("cascade");
   })
 };
 
