@@ -7,7 +7,7 @@ const db = require("../db/db");
  */
 const createAccount = async (accountBody) => {
   const [account] = await db("accounts").insert(accountBody)
-  return getAccountById(account)
+  return await getAccountById(account)
 }
 
 /**
@@ -29,7 +29,7 @@ const getAccountById = async (accountId) => {
 const updateAccount = async (accountId, updateBody, transaction) => {
   if (transaction) {
     await db('accounts').where({ id: accountId }).update(updateBody).transacting(transaction);
-    return getAccountById(accountId)
+    return await getAccountById(accountId)
   }
   await db('accounts').where({ id: accountId }).update(updateBody)
   return getAccountById(accountId)

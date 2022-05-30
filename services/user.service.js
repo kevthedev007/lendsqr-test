@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
  */
 const createUser = async (createBody) => {
   const [id] = await db("users").insert(createBody)
-  return getUserById(id);
+  return await getUserById(id);
 }
 
 /**
