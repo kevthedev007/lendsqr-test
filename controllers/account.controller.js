@@ -23,6 +23,8 @@ const fundAccount = async (req, res, next) => {
         trx,
       )
 
+      const newAccount = await AccountService.getAccountById(account.id)
+
       await TransactionService.addToTransaction({
         transactionType: "deposit",
         amount,
@@ -33,7 +35,7 @@ const fundAccount = async (req, res, next) => {
 
       return res.status(201).json({
         success: true,
-        updatedAccount,
+        newAccount,
         message: "Account funded successfully"
       })
     })
