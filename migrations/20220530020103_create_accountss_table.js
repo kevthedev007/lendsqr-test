@@ -4,7 +4,7 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable("accounts", table => {
-    table.uuid("id").primary().defaultTo(knex.raw("(UUID())"));
+    table.increments("id").primary();
     table.string("accountName", 255).notNullable();
     table.string("accountNumber").notNullable();
     table.double("balance").notNullable().defaultTo(0);

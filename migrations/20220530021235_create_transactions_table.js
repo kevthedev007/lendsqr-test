@@ -4,7 +4,7 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable("transactions", table => {
-    table.uuid("id").primary().defaultTo(knex.raw("(UUID())"));
+    table.increments("id").primary();
     table.enum('transactionType', ['withdrawal', 'transfer', 'deposit']).notNullable();
     table.double("amount").notNullable();
     table.enum("status", ["success", "failed"]).defaultTo("success").notNullable();
