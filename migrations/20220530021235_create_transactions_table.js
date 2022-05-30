@@ -3,11 +3,11 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable("accounts", table => {
+  return knex.schema.createTable("transactions", table => {
     table.uuid("id").primary().defaultTo(knex.raw("(UUID())"));
-    table.string("accountName", 255).notNullable();
-    table.string("accountNumber").notNullable();
-    table.double("balance").notNullable().defaultTo(0);
+    table.enum('transactionType', ['withdrawal', 'transfer', 'deposit']).notNullable();
+    table.double("amount").notNullable();
+    table.enum("status", ["success", "failed"]).defaultTo("success").notNullable();
     table.integer('userId').unsigned().nullable();
     table.foreign('userId').references('users.id');
   })
@@ -18,5 +18,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable("accounts")
+  return knex.schema.dropTable("transactions")
 };
