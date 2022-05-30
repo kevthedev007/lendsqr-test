@@ -7,5 +7,6 @@ const router = express.Router();
 router.patch("/deposit", [depositValidation, verifyToken], fundAccount);
 router.patch("/transfer", [transferValidation, verifyToken], transferFund);
 router.patch("/withdraw", [depositValidation, verifyToken], withdraw);
+router.get("/balance", verifyToken, withdraw);
 
 module.exports = router
