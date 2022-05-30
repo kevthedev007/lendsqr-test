@@ -8,8 +8,8 @@ exports.up = function (knex) {
     table.string("accountName", 255).notNullable();
     table.string("accountNumber").notNullable();
     table.double("balance").notNullable().defaultTo(0);
-    table.integer('userId').unsigned().nullable();
-    table.foreign('userId').references('users.id');
+    table.integer('userId').unsigned()
+    table.foreign('userId').unique().references('users.id');
   })
 };
 

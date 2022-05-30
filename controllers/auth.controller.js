@@ -4,7 +4,8 @@ const createError = require('http-errors');
 
 const register = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, password } = req.body;
+    const email = req.body.email.toLowerCase();
 
     const emailExists = await UserService.queryUser({ email });
 
@@ -88,7 +89,7 @@ const login = async (req, res, next) => {
 
   try {
     const email = req.body.email.toLowerCase();
-    const password = req.body.password.toLowerCase();
+    const password = req.body.password;
     //check if email exists
     const user = await UserService.queryUser({ email });
     if (!user) {

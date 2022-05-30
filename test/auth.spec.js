@@ -9,11 +9,8 @@ let server = require('../app');
 let should = chai.should()
 chai.use(chaiHttp);
 
-// describe('API Routes', function () {
 
-// });
-
-let userId = 20;
+let userId = 40;
 let token = jwt.sign({ id: userId }, process.env.JWT_SECRET_KEY)
 const users = {
   id: userId,
@@ -65,29 +62,10 @@ describe("Auth API", () => {
           res.should.be.a('object');
           res.body.should.have.property('success');
           res.body.success.should.equal(true)
-          done();
         })
+      done();
     })
   })
-
-  // describe("POST /login", () => {
-  //   it("should login a user", (done) => {
-  //     chai.request(server)
-  //       .post("/auth/login")
-  //       .send({
-  //         email: "kev@gmail.com",
-  //         password: "kevkev"
-  //       })
-  //       .end((err, res) => {
-  //         res.should.have.status(201);
-  //         res.should.be.json;
-  //         res.should.be.a('object');
-  //         res.body.should.have.property('success');
-  //         res.body.success.should.equal(true)
-  //         done();
-  //       })
-  //   })
-  // })
 
   describe("POST /add-account", () => {
     it("should add an account for a user", (done) => {
@@ -109,7 +87,7 @@ describe("Auth API", () => {
     })
   })
 
-  describe("POST /deposit", () => {
+  describe("PATCH /deposit", () => {
     it("add money to account", (done) => {
       chai.request(server)
         .patch("/account/deposit")
@@ -121,10 +99,29 @@ describe("Auth API", () => {
           res.should.have.status(201);
           res.should.be.json;
           res.should.be.a('object');
-          // res.body.should.have.property('success');
-          // res.body.success.should.equal(true)
-          done();
+          res.body.should.have.property('success');
+          res.body.success.should.equal(true)
         })
+      done();
+    })
+  })
+
+  describe("PATCH /withdraw", () => {
+    it("add money to account", (done) => {
+      chai.request(server)
+        .patch("/account/withdraw")
+        .set("authorization", token)
+        .send({
+          amount: 500
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.should.be.a('object');
+          res.body.should.have.property('success');
+          res.body.success.should.equal(true)
+        })
+      done();
     })
   })
 })

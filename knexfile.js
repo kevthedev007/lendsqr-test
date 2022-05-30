@@ -5,11 +5,11 @@
  */
 module.exports = {
   development: {
-    client: 'postgresql',
+    client: 'mysql',
     connection: {
       database: 'lendsqr',
-      user: "postgres",
-      password: "sasuke007"
+      user: "root",
+      password: process.env.DATABASE_PASS
     },
     pool: {
       min: 2,
@@ -21,11 +21,11 @@ module.exports = {
   },
 
   test: {
-    client: 'postgresql',
+    client: 'mysql',
     connection: {
       database: 'lendsqr_test',
-      user: "postgres",
-      password: "sasuke007"
+      user: "root",
+      password: process.env.DATABASE_PASS
     },
     pool: {
       min: 2,

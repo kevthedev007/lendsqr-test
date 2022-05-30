@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.enum('transactionType', ['withdrawal', 'transfer', 'deposit']).notNullable();
     table.double("amount").notNullable();
     table.enum("status", ["success", "failed"]).defaultTo("success").notNullable();
-    table.integer('userId').unsigned().nullable();
+    table.integer('userId').unsigned().notNullable()
     table.foreign('userId').references('users.id');
   })
 };
