@@ -23,8 +23,6 @@ const fundAccount = async (req, res, next) => {
         trx,
       )
 
-      const newAccount = await AccountService.getAccountById(account.id)
-
       await TransactionService.addToTransaction({
         transactionType: "deposit",
         amount,
@@ -35,8 +33,8 @@ const fundAccount = async (req, res, next) => {
 
       return res.status(201).json({
         success: true,
-        newAccount,
-        message: "Account funded successfully"
+        message: `Account funded successfully, new balance is ${account.balance + amount
+          }`
       })
     })
   } catch (error) {
@@ -102,8 +100,8 @@ const transferFund = async (req, res, next) => {
 
       return res.status(201).json({
         success: true,
-        withdrawalAccount,
-        message: "Funds transfered successfully"
+        message: `Money transferred successful, new balance is ${account.balance - amount
+          }`
       })
     })
   } catch (error) {
@@ -145,8 +143,8 @@ const withdraw = async (req, res, next) => {
 
       return res.status(201).json({
         success: true,
-        updatedAccount,
-        message: "Money withdrawn successfully"
+        message: `Money withdrawn successfully, new balance is ${account.balance - amount
+          }`
       })
     })
   } catch (error) {
@@ -160,7 +158,6 @@ const checkBalance = async (req, res, next) => {
     return res.status(201).json({
       success: true,
       account,
-      message: "Money withdrawn successfully"
     })
   } catch (error) {
     next(error)
